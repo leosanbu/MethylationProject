@@ -20,7 +20,7 @@ suppressMessages(library(reshape2))
 pathtoipds <- args[1]
 motifslist <- args[2]
 ylimit <- args[3]
-if (is.null(ylimit)){ ylimit <- 15 }
+if (is.null(ylimit)){ ylimit <- 15 }  # for when you want to re-do one with another y-limit
 
 ## FUNCTIONS ##
 readMotifs <- function(motifslist){
@@ -117,7 +117,7 @@ for (i in 1:nrow(queryMat)){
     # Boxplots of IPDs per base/strand
     tabList <- dataframes[[1]]
     
-    plots <- makeBoxPlots(tabList, motifSeq)
+    plots <- makeBoxPlots(tabList, motifSeq, ylimit=ylimit)
     pdf(outfilename, width=18, height=15, useDingbats=F)
     grid.arrange(grobs=plots, ncol=5, nrow=5)
     dev.off()
