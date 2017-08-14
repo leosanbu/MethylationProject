@@ -239,7 +239,7 @@ for (i in 1:length(fuzznucfiles)){
       # Write ipd ratios of this motif/strain to a text file #
       colnames(printOut)[1] <- "contig"
       
-      # For motifs in reverse strand, reverse values (move this bit into previous scripts)
+      # For motifs in reverse strand, reverse values
       g0 <- which(printOut$MotifStrand=="-" & printOut$IPDstrand=="IPD0")
       g1 <- which(printOut$MotifStrand=="-" & printOut$IPDstrand=="IPD1")
       

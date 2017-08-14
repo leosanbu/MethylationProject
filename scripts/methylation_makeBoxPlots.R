@@ -20,7 +20,7 @@ suppressMessages(library(reshape2))
 pathtoipds <- args[1]
 motifslist <- args[2]
 ylimit <- args[3]
-if (is.null(ylimit)){ ylimit <- 15 }  # for when you want to re-do one with another y-limit
+if (is.na(ylimit)){ ylimit <- 15 }  # for when you want to re-do one with another y-limit
 
 ## FUNCTIONS ##
 readMotifs <- function(motifslist){
