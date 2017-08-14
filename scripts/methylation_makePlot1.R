@@ -99,22 +99,29 @@ queryMat <- readMotifs(motifslist)
 for (i in 1:nrow(queryMat)){
   motifName <- queryMat[i,1]
   motifSeq <- queryMat[i,2]
-  cat(motifName, "\t", motifSeq, "\n")
   
-  # Read input files
-  files <- dir(paste0(pathtoipds, "/", motifName), pattern="_IPDs.txt")
-  
-  # Create data frames
-  dataframes <- createDataFrames(files)
-  
-  # Plot 1
-  # Boxplots of IPDs per base/strand
-  tabList <- dataframes[[1]]
-  
-  plots <- makeBoxPlots(tabList, motifSeq)
-  pdf(paste0(pathtoipds, "/", motifName, "/", motifSeq, ".pdf"), width=18, height=15, useDingbats=F)
-  grid.arrange(grobs=plots, ncol=5, nrow=5)
-  dev.off()
+  outfilename <- paste0(pathtoipds, "/", motifName, "/", motifSeq, ".pdf")
+  if (file.exists(outfilename)){
+    cat(motifName, "\t", outfilename, "exists, skipping...\n")
+  }else{
+    
+    # Read input files
+    files <- dir(paste0(pathtoipds, "/", motifName), pattern="_IPDs.txt")
+    
+    # Create data frames
+    suppressMessages(dataframes <- createDataFrames(files))
+    
+    # Plot 1
+    # Boxplots of IPDs per base/strand
+    tabList <- dataframes[[1]]
+    
+    plots <- makeBoxPlots(tabList, motifSeq)
+    pdf(outfilename, width=18, height=15, useDingbats=F)
+    grid.arrange(grobs=plots, ncol=5, nrow=5)
+    dev.off()
+    
+    cat(motifName, "\t", outfilename, "created\n")
+  }
 }
 
 
