@@ -88,7 +88,7 @@ readMotifs <- function(motifslist){
     }
   }
   queryMat <- rbind(queryMat, c(name, seq))
-  queryMat <- queryMat[-1,]
+  queryMat <- queryMat[-1,, drop=F]
   queryMat[,1] <- gsub(">", "", queryMat[,1])
   return(queryMat)
 }
