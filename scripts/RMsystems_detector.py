@@ -5,7 +5,7 @@ parser = args.ArgumentParser(description='Restriction-Modification systems detec
 parser.add_argument("-i", "--input_gff", help="GFF file.", required=True)
 parser.add_argument("-p", "--pfam_dom", help="List of PFAM domains to search for.", required=True)
 parser.add_argument("-m", "--pfam_hmm", help="Result of hmmscan on a Pfam database.", required=False)
-parser.add_argument("-d", "--distance", help="Maximum distance (in number of genes) to cluster R and M (default = 5).", default=5, required=False)
+parser.add_argument("-d", "--distance", help="Maximum distance (in number of genes) to cluster R and M (default = 10).", default=10, required=False)
 parser.add_argument("-o", "--outfile", help="Prefix for output files.", required=True)
 
 args = parser.parse_args()
