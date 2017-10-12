@@ -107,7 +107,7 @@ for (i in 1:nrow(queryMat)){
     cat(motifName, "\t", outfilename, "exists, skipping...\n")
   }else{
     
-    # Read input files
+    # Read files
     files <- dir(paste0(pathtoipds, "/", motifName), pattern="_IPDs.txt")
     
     # Create data frames
