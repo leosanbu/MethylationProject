@@ -128,18 +128,10 @@ parseFuzznuc <- function(fuzznuc.file){
     
     fuzzlist[[i]] <- split.fragment
   }
-  # g <- grep("contig", fuzz[gseq])
-  # if (length(g)==0){
-  #   names.gseq <- c()
-  #   for (x in 1:length(gseq)){
-  #     names.gseq <- c(names.gseq, paste0("contig00000", x))
-  #   }
-  # }else{
-    names.gseq <- gsub("# Sequence: ", "", fuzz[gseq])
-    names.gseq <- gsub(".*contig", "contig", names.gseq)
-    names.gseq <- gsub(" .*", "", names.gseq)
-    names.gseq <- gsub("\\..*", "", names.gseq)
-  # }
+  names.gseq <- gsub("# Sequence: ", "", fuzz[gseq])
+  names.gseq <- gsub(".*contig", "contig", names.gseq)
+  names.gseq <- gsub(" .*", "", names.gseq)
+  names.gseq <- gsub("\\..*", "", names.gseq)
   names(fuzzlist) <- names.gseq
   return(fuzzlist)
 }
@@ -216,8 +208,6 @@ for (i in 1:length(fuzznucfiles)){
         contig <- gsub(".*contig", "contig", contigs[con])
         contig <- gsub(" .*", "", contig)
         mod <- modifications[which(modifications[[1]]==contigs[con]),] # Subset the modifications file to the contig #
-        #g <- grep(contig, modifications[[1]])
-        #if (length(g)>0){ mod <- modifications[g,] }else{ stop("Contig ", contig, " not found in modifications.csv file\n") }
         fuzztig <- fuzznuc[[contig]] # Subset the fuzznuc file to the contig #
         motifs <- fuzztig[which(fuzztig[[4]]==motifName),] # Select motif #
         if (is.null(dim(motifs))){ motifs <- t(as.matrix(motifs)) }
