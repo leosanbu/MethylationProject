@@ -209,7 +209,13 @@ for (i in 1:length(fuzznucfiles)){
         contig <- gsub(" .*", "", contig)
         mod <- modifications[which(modifications[[1]]==contigs[con]),] # Subset the modifications file to the contig #
         fuzztig <- fuzznuc[[contig]] # Subset the fuzznuc file to the contig #
-        motifs <- fuzztig[which(fuzztig[[4]]==motifName),] # Select motif #
+        # Check if fuzznuc output adds the sequence to the motif name in column 4 #
+        check.name <- grep(":", fuzztig[[4]])
+        if (length(check.name)>0){
+          fuzztig[[4]] <- gsub("\\:.*", "", fuzztig[[4]])
+        }
+        # Select motif #
+        motifs <- fuzztig[which(fuzztig[[4]]==motifName),]
         if (is.null(dim(motifs))){ motifs <- t(as.matrix(motifs)) }
         
         if (nrow(motifs)>0){
